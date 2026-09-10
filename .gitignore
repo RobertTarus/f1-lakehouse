@@ -22,3 +22,5 @@ data/seaweedfs/
 
 .venv/
 .venv-dbt/
+
+airflow/logs/
