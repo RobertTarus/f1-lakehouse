@@ -1,0 +1,24 @@
+# Environment
+.env
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# FastF1 cache
+data/cache/
+
+# SeaweedFS persistent data
+data/seaweedfs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+.venv/
+.venv-dbt/

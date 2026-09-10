@@ -1,0 +1,111 @@
+version: 2
+
+models:
+
+  - name: silver_laps
+    description: Valid, analysis-ready Formula 1 laps.
+
+    columns:
+      - name: season
+        data_tests:
+          - not_null
+
+      - name: event_slug
+        data_tests:
+          - not_null
+
+      - name: driver_code
+        data_tests:
+          - not_null
+
+      - name: lap_number
+        data_tests:
+          - not_null
+
+      - name: lap_time_ms
+        data_tests:
+          - not_null
+
+
+  - name: silver_results
+    description: Cleaned Formula 1 session classification results.
+
+    columns:
+      - name: season
+        data_tests:
+          - not_null
+
+      - name: event_slug
+        data_tests:
+          - not_null
+
+      - name: session_type
+        data_tests:
+          - not_null
+
+      - name: driver_code
+        data_tests:
+          - not_null
+
+      - name: position
+        data_tests:
+          - not_null
+
+
+  - name: silver_weather
+    description: Cleaned Formula 1 session weather observations.
+
+    columns:
+      - name: season
+        data_tests:
+          - not_null
+
+      - name: event_slug
+        data_tests:
+          - not_null
+
+      - name: session_type
+        data_tests:
+          - not_null
+
+      - name: session_time_ms
+        data_tests:
+          - not_null
+
+  - name: silver_telemetry
+    description: >
+      Validated and deduplicated Formula 1 telemetry samples.
+
+    columns:
+
+      - name: season
+        data_tests:
+          - not_null
+
+      - name: event_slug
+        data_tests:
+          - not_null
+
+      - name: session_type
+        data_tests:
+          - not_null
+
+      - name: driver_code
+        data_tests:
+          - not_null
+
+      - name: lap_number
+        data_tests:
+          - not_null
+
+      - name: sample_timestamp_utc
+        data_tests:
+          - not_null
+
+      - name: speed_kph
+        data_tests:
+          - not_null
+
+      - name: throttle_pct
+        data_tests:
+          - not_null

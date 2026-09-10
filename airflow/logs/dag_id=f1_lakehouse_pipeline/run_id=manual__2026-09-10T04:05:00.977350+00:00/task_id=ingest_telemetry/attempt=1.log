@@ -1,0 +1,156 @@
+{"timestamp":"2026-09-10T04:05:11.663764Z","level":"info","event":"::group::Pre Execute","logger":"task","filename":"task_runner.py","lineno":2412}
+{"timestamp":"2026-09-10T04:05:11.744062Z","level":"info","event":"DAG bundles loaded: dags-folder","ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"dag_id":"f1_lakehouse_pipeline","try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":304}
+{"timestamp":"2026-09-10T04:05:11.744610Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/f1_lakehouse_pipeline.py","ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"dag_id":"f1_lakehouse_pipeline","try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":460}
+{"timestamp":"2026-09-10T04:05:11.795328Z","level":"info","event":"Worker startup parse complete","bundle_name":"dags-folder","bundle_version":null,"dag_file":"f1_lakehouse_pipeline.py","dag_id":"f1_lakehouse_pipeline","bundle_prepare_ms":1,"dag_file_parse_ms":50,"ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"task","filename":"task_runner.py","lineno":1073}
+{"timestamp":"2026-09-10T04:05:11.865882Z","level":"info","event":"::endgroup::","ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"dag_id":"f1_lakehouse_pipeline","try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"task","filename":"task_runner.py","lineno":2232}
+{"timestamp":"2026-09-10T04:05:11.868061Z","level":"info","event":"Executing: /opt/airflow/venvs/pipeline/bin/python src/ingestion/ingest_telemetry.py --year 2026 --event Italian Grand Prix --session R","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:05:12.836118Z","level":"error","event":"core           INFO \tLoading data for Italian Grand Prix - Race [v3.8.3]","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.836611Z","level":"error","event":"req            INFO \tUsing cached data for session_info","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.837189Z","level":"error","event":"req            INFO \tUsing cached data for driver_info","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.879860Z","level":"error","event":"req            INFO \tUsing cached data for session_status_data","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.880824Z","level":"error","event":"req            INFO \tUsing cached data for lap_count","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.881153Z","level":"error","event":"req            INFO \tUsing cached data for track_status_data","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.890515Z","level":"error","event":"req            INFO \tUsing cached data for _extended_timing_data","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.892059Z","level":"error","event":"req            INFO \tUsing cached data for timing_app_data","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:12.892287Z","level":"error","event":"core           INFO \tProcessing timing data...","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:14.161896Z","level":"error","event":"core        WARNING \tDriver 12 completed the race distance 00:00.013000 before the recorded end of the session.","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:14.283089Z","level":"error","event":"req            INFO \tUsing cached data for car_data","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:14.406066Z","level":"error","event":"req            INFO \tUsing cached data for position_data","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:05:15.991672Z","level":"error","event":"core           INFO \tFinished loading data for 22 drivers: ['12', '63', '3', '1', '81', '44', '10', '41', '43', '22', '5', '27', '55', '30', '87', '31', '23', '11', '77', '18', '14', '16']","logger":"task.stderr"}
+{"timestamp":"2026-09-10T04:11:51.784563Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.785095Z","level":"info","event":"===========================================================================","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.785280Z","level":"info","event":"FASTF1 FULL-RACE TELEMETRY INGESTION","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.785437Z","level":"info","event":"===========================================================================","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.785588Z","level":"info","event":"Season : 2026","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.785736Z","level":"info","event":"Event  : Italian Grand Prix","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.785906Z","level":"info","event":"Session: R","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786059Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786203Z","level":"info","event":"Loading FastF1 session once...","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786343Z","level":"info","event":"Session loaded.","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786482Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786666Z","level":"info","event":"Drivers to process: 22","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786754Z","level":"info","event":"ANT, RUS, VER, NOR, PIA, HAM, GAS, LIN, COL, TSU, BOR, HUL, SAI, LAW, BEA, OCO, ALB, PER, BOT, STR, ALO, LEC","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786807Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786862Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786914Z","level":"info","event":"[1/22] Processing ANT","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.786961Z","level":"info","event":"ANT: 36,453 rows | 2.68 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787010Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=ANT/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787055Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787100Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787145Z","level":"info","event":"[2/22] Processing RUS","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787189Z","level":"info","event":"RUS: 36,230 rows | 2.46 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787232Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=RUS/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787277Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787320Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787363Z","level":"info","event":"[3/22] Processing VER","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787406Z","level":"info","event":"VER: 36,368 rows | 2.70 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787449Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=VER/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787492Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787535Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787579Z","level":"info","event":"[4/22] Processing NOR","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787630Z","level":"info","event":"NOR: 36,488 rows | 2.73 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787681Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=NOR/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787725Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787769Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787814Z","level":"info","event":"[5/22] Processing PIA","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787864Z","level":"info","event":"PIA: 36,465 rows | 2.72 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787906Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=PIA/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787948Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.787993Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788038Z","level":"info","event":"[6/22] Processing HAM","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788080Z","level":"info","event":"HAM: 36,557 rows | 2.77 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788123Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=HAM/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788167Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788211Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788254Z","level":"info","event":"[7/22] Processing GAS","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788298Z","level":"info","event":"GAS: 36,432 rows | 2.70 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788341Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=GAS/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788383Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788428Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788470Z","level":"info","event":"[8/22] Processing LIN","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788515Z","level":"info","event":"LIN: 36,688 rows | 2.75 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788557Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=LIN/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788599Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788714Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788760Z","level":"info","event":"[9/22] Processing COL","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788804Z","level":"info","event":"COL: 36,614 rows | 2.72 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788851Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=COL/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788894Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788940Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.788986Z","level":"info","event":"[10/22] Processing TSU","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789038Z","level":"info","event":"TSU: 36,938 rows | 2.76 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789090Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=TSU/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789137Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789185Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789237Z","level":"info","event":"[11/22] Processing BOR","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789283Z","level":"info","event":"BOR: 36,915 rows | 2.76 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789333Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=BOR/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789381Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789429Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789477Z","level":"info","event":"[12/22] Processing HUL","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789524Z","level":"info","event":"HUL: 36,948 rows | 2.78 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789573Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=HUL/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789622Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789668Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789715Z","level":"info","event":"[13/22] Processing SAI","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789805Z","level":"info","event":"SAI: 37,096 rows | 2.77 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789863Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=SAI/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789911Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.789959Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790006Z","level":"info","event":"[14/22] Processing LAW","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790052Z","level":"info","event":"LAW: 37,095 rows | 2.78 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790098Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=LAW/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790144Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790190Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790236Z","level":"info","event":"[15/22] Processing BEA","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790281Z","level":"info","event":"BEA: 36,986 rows | 2.77 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790324Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=BEA/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790367Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790410Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790453Z","level":"info","event":"[16/22] Processing OCO","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790500Z","level":"info","event":"OCO: 36,476 rows | 2.74 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790546Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=OCO/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790588Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790631Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790752Z","level":"info","event":"[17/22] Processing ALB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790810Z","level":"info","event":"ALB: 36,746 rows | 2.74 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790866Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=ALB/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790917Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.790972Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791023Z","level":"info","event":"[18/22] Processing PER","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791074Z","level":"info","event":"PER: 37,077 rows | 2.79 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791124Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=PER/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791172Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791223Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791275Z","level":"info","event":"[19/22] Processing BOT","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791323Z","level":"info","event":"BOT: 36,704 rows | 2.77 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791370Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=BOT/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791416Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791462Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791508Z","level":"info","event":"[20/22] Processing STR","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791553Z","level":"info","event":"STR: 20,934 rows | 1.54 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791599Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=STR/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791642Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791686Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791730Z","level":"info","event":"[21/22] Processing ALO","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791774Z","level":"info","event":"ALO: 17,774 rows | 1.33 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791818Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=ALO/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791867Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791912Z","level":"info","event":"---------------------------------------------------------------------------","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.791956Z","level":"info","event":"[22/22] Processing LEC","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792003Z","level":"info","event":"LEC: 7,034 rows | 0.32 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792051Z","level":"info","event":"s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/driver=LEC/telemetry.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792095Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792140Z","level":"info","event":"Manifest: s3://f1-raw/season=2026/event=italian-grand-prix/session=R/telemetry/_manifest.parquet","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792183Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792227Z","level":"info","event":"===========================================================================","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792271Z","level":"info","event":"INGESTION SUMMARY","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792313Z","level":"info","event":"===========================================================================","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792357Z","level":"info","event":"Drivers processed : 22/22","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792400Z","level":"info","event":"Telemetry rows    : 743,018","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792443Z","level":"info","event":"Stored data       : 55.08 MB","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792487Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:51.792530Z","level":"info","event":"FULL-RACE TELEMETRY INGESTION COMPLETE","logger":"task.stdout"}
+{"timestamp":"2026-09-10T04:11:52.018619Z","level":"info","event":"Done. Returned value was: None","ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"dag_id":"f1_lakehouse_pipeline","try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"airflow.task.operators.airflow.providers.standard.decorators.python._PythonDecoratedOperator","filename":"python.py","lineno":233}
+{"timestamp":"2026-09-10T04:11:52.018873Z","level":"info","event":"::group::Post Execute","ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"dag_id":"f1_lakehouse_pipeline","try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"task","filename":"task_runner.py","lineno":1580}
+{"timestamp":"2026-09-10T04:11:52.039638Z","level":"info","event":"::endgroup::","ti_id":"01a0897d-89dc-7c51-9c06-5b45c329a5a4","task_id":"ingest_telemetry","map_index":-1,"dag_id":"f1_lakehouse_pipeline","try_number":1,"run_id":"manual__2026-09-10T04:05:00.977350+00:00","logger":"task","filename":"task_runner.py","lineno":2379}

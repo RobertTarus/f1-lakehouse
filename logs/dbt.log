@@ -1,0 +1,72 @@
+[0m22:47:56.770098 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6590ead6a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f658fa91e50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f658fa92490>]}
+
+
+============================== 22:47:56.793117 | 02bb4034-2a40-4a8a-a24d-d2eb9adb9ed7 ==============================
+[0m22:47:56.793117 [info ] [MainThread]: Running with dbt=1.12.4
+[0m22:47:56.794542 [debug] [MainThread]: running dbt with arguments {'log_path': 'logs', 'no_print': 'None', 'send_anonymous_usage_stats': 'True', 'hints_enabled': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'indirect_selection': 'eager', 'static_parser': 'True', 'partial_parse': 'True', 'log_cache_events': 'False', 'profiles_dir': './configs/dbt', 'log_format': 'default', 'debug': 'False', 'version_check': 'True', 'introspect': 'True', 'quiet': 'False', 'empty': 'None', 'use_colors': 'True', 'maximum_seed_size_mib': '1', 'fail_fast': 'False', 'printer_width': '80', 'use_experimental_parser': 'False', 'invocation_command': 'dbt debug --project-dir ./dbt --profiles-dir ./configs/dbt', 'target_path': 'None', 'write_json': 'True', 'cache_selected_only': 'False', 'warn_error': 'None'}
+[0m22:47:56.823268 [info ] [MainThread]: dbt version: 1.12.4
+[0m22:47:56.824453 [info ] [MainThread]: python version: 3.13.15
+[0m22:47:56.825347 [info ] [MainThread]: python path: /var/home/tarus/projects/f1-lakehouse/.venv-dbt/bin/python3.13
+[0m22:47:56.826061 [info ] [MainThread]: os info: Linux-7.2.1-ogc4.1.fc44.x86_64-x86_64-with-glibc2.43
+[0m22:47:56.827720 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+cannot access local variable 'summary_message' where it is not associated with a value
+[0m22:47:56.831955 [error] [MainThread]: Traceback (most recent call last):
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/cli/requires.py", line 198, in wrapper
+    result, success = func(*args, **kwargs)
+                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/cli/requires.py", line 144, in wrapper
+    return func(*args, **kwargs)
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/cli/main.py", line 440, in debug
+    results = task.run()
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/task/debug.py", line 114, in run
+    load_profile_status: SubtaskStatus = self._load_profile()
+                                         ~~~~~~~~~~~~~~~~~~^^
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/task/debug.py", line 201, in _load_profile
+    profile_names, summary_message = self._choose_profile_names()
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/task/debug.py", line 276, in _choose_profile_names
+    return profiles, summary_message
+                     ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'summary_message' where it is not associated with a value
+
+[0m22:47:56.834889 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.07780589, "process_in_blocks": "32", "process_kernel_time": 0.106131, "process_mem_max_rss": "112796", "process_out_blocks": "248", "process_user_time": 2.00238}
+[0m22:47:56.836191 [debug] [MainThread]: Command `dbt debug` failed at 22:47:56.835924 after 0.08 seconds
+[0m22:47:56.837033 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f658fb156e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f658fb5a8d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f658fb02030>]}
+[0m22:47:56.837921 [debug] [MainThread]: Flushing usage events
+[0m22:47:57.108496 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:48:14.902607 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f109abc96a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f10997ade50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f10997ae490>]}
+
+
+============================== 22:48:14.912745 | 56ed8dcb-531b-49e8-ad91-bc10a94e97f0 ==============================
+[0m22:48:14.912745 [info ] [MainThread]: Running with dbt=1.12.4
+[0m22:48:14.914358 [debug] [MainThread]: running dbt with arguments {'log_path': 'logs', 'quiet': 'False', 'printer_width': '80', 'log_format': 'default', 'maximum_seed_size_mib': '1', 'send_anonymous_usage_stats': 'True', 'debug': 'False', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'empty': 'None', 'no_print': 'None', 'target_path': 'None', 'use_experimental_parser': 'False', 'use_colors': 'True', 'introspect': 'True', 'invocation_command': 'dbt debug --project-dir ./dbt --profiles-dir ./configs/dbt', 'indirect_selection': 'eager', 'write_json': 'True', 'cache_selected_only': 'False', 'partial_parse': 'True', 'fail_fast': 'False', 'profiles_dir': './configs/dbt', 'warn_error': 'None', 'log_cache_events': 'False', 'hints_enabled': 'True'}
+[0m22:48:14.942677 [info ] [MainThread]: dbt version: 1.12.4
+[0m22:48:14.943557 [info ] [MainThread]: python version: 3.13.15
+[0m22:48:14.944159 [info ] [MainThread]: python path: /var/home/tarus/projects/f1-lakehouse/.venv-dbt/bin/python3.13
+[0m22:48:14.944688 [info ] [MainThread]: os info: Linux-7.2.1-ogc4.1.fc44.x86_64-x86_64-with-glibc2.43
+[0m22:48:14.945843 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+cannot access local variable 'summary_message' where it is not associated with a value
+[0m22:48:14.948891 [error] [MainThread]: Traceback (most recent call last):
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/cli/requires.py", line 198, in wrapper
+    result, success = func(*args, **kwargs)
+                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/cli/requires.py", line 144, in wrapper
+    return func(*args, **kwargs)
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/cli/main.py", line 440, in debug
+    results = task.run()
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/task/debug.py", line 114, in run
+    load_profile_status: SubtaskStatus = self._load_profile()
+                                         ~~~~~~~~~~~~~~~~~~^^
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/task/debug.py", line 201, in _load_profile
+    profile_names, summary_message = self._choose_profile_names()
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/var/home/tarus/projects/f1-lakehouse/.venv-dbt/lib/python3.13/site-packages/dbt/task/debug.py", line 276, in _choose_profile_names
+    return profiles, summary_message
+                     ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'summary_message' where it is not associated with a value
+
+[0m22:48:14.950723 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.052589234, "process_in_blocks": "0", "process_kernel_time": 0.139385, "process_mem_max_rss": "111540", "process_out_blocks": "0", "process_user_time": 1.984655}
+[0m22:48:14.951630 [debug] [MainThread]: Command `dbt debug` failed at 22:48:14.951442 after 0.05 seconds
+[0m22:48:14.952269 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f10997f95b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f109987a9f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f1099802030>]}
+[0m22:48:14.952953 [debug] [MainThread]: Flushing usage events
+[0m22:48:15.111257 [debug] [MainThread]: An error was encountered while trying to flush usage events

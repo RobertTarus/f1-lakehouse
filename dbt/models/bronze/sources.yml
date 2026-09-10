@@ -1,0 +1,84 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: iceberg
+    schema: bronze
+
+    tables:
+      - name: laps
+        columns:
+          - name: season
+            data_tests:
+              - not_null
+
+          - name: event_slug
+            data_tests:
+              - not_null
+
+          - name: session_type
+            data_tests:
+              - not_null
+
+          - name: driver_code
+            data_tests:
+              - not_null
+
+          - name: lap_number
+            data_tests:
+              - not_null
+
+      - name: results
+        columns:
+          - name: season
+            data_tests:
+              - not_null
+
+          - name: event_slug
+            data_tests:
+              - not_null
+
+          - name: driver_code
+            data_tests:
+              - not_null
+
+      - name: weather
+        columns:
+          - name: season
+            data_tests:
+              - not_null
+
+          - name: event_slug
+            data_tests:
+              - not_null
+
+      - name: telemetry
+        description: >
+          High-frequency Formula 1 telemetry samples extracted
+          from FastF1 and stored in Apache Iceberg.
+
+        columns:
+
+          - name: season
+            data_tests:
+              - not_null
+
+          - name: event_slug
+            data_tests:
+              - not_null
+
+          - name: session_type
+            data_tests:
+              - not_null
+
+          - name: driver_code
+            data_tests:
+              - not_null
+
+          - name: lap_number
+            data_tests:
+              - not_null
+
+          - name: sample_timestamp_utc
+            data_tests:
+              - not_null

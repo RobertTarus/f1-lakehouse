@@ -1,0 +1,30 @@
+version: 2
+
+models:
+
+  - name: race_driver_performance
+    description: >
+      Driver-level race performance mart combining lap pace,
+      final classification and session weather.
+
+    columns:
+
+      - name: season
+        data_tests:
+          - not_null
+
+      - name: event_slug
+        data_tests:
+          - not_null
+
+      - name: driver_code
+        data_tests:
+          - not_null
+
+      - name: valid_laps
+        data_tests:
+          - not_null
+
+      - name: avg_lap_seconds
+        data_tests:
+          - not_null

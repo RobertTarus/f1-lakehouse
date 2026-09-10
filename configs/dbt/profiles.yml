@@ -1,0 +1,22 @@
+f1_lakehouse:
+
+  target: dev
+
+  outputs:
+
+    dev:
+      type: trino
+
+      method: none
+
+      host: "{{ env_var('TRINO_HOST', 'localhost') }}"
+      port: "{{ env_var('TRINO_PORT', '8081') | int }}"
+
+      user: f1_dbt
+
+      database: iceberg
+      schema: silver
+
+      http_scheme: http
+
+      threads: 4
