@@ -9,7 +9,7 @@ The project treats Formula 1 data as a real data-engineering workload: race data
 ```mermaid
 flowchart TD
   A[FastF1] --> B[Python ingestion]
-  B --> C[SeaweedFS raw Parquet and JSON]
+  B --> C[SeaweedFS raw Parquet]
   C --> D[PyArrow and PyIceberg]
   D --> E[Iceberg Bronze tables]
   E --> F[Trino and dbt]
