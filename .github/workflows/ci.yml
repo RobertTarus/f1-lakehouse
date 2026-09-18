@@ -1,0 +1,182 @@
+name: F1 Lakehouse CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: f1-lakehouse-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Dummy CI-only values used to validate compose.yaml.
+  # These are NOT production credentials.
+  AIRFLOW_UID: "50000"
+  AIRFLOW_JWT_SECRET: "ci-only-jwt-secret"
+  AIRFLOW_API_SECRET: "ci-only-api-secret"
+
+  AWS_ACCESS_KEY_ID: "ci-access-key"
+  AWS_SECRET_ACCESS_KEY: "ci-secret-key"
+
+  SEAWEED_S3_BUCKET: "f1-raw"
+  SEAWEED_TABLE_BUCKET: "f1-iceberg"
+
+
+jobs:
+
+  # ==========================================================
+  # REPOSITORY VALIDATION
+  # ==========================================================
+
+  validate:
+    name: Validate repository
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # --------------------------------------------------------
+      # CHECKOUT
+      # --------------------------------------------------------
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+
+      # --------------------------------------------------------
+      # PYTHON
+      # --------------------------------------------------------
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      # --------------------------------------------------------
+      # REQUIRED PROJECT FILES
+      # --------------------------------------------------------
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            "compose.yaml"
+            "requirements.txt"
+            "README.md"
+            "airflow/dags/f1_season_pipeline.py"
+            "src/common/find_missing_races.py"
+            "src/ingestion/ingest_session.py"
+            "src/ingestion/ingest_telemetry.py"
+            "src/iceberg/promote_bronze.py"
+            "src/iceberg/promote_all_telemetry.py"
+            "src/iceberg/load_silver_telemetry.py"
+          )
+
+          for file in "${required_files[@]}"
+          do
+            echo "Checking: $file"
+
+            if [[ ! -f "$file" ]]
+            then
+              echo "::error file=$file::Required file is missing"
+              exit 1
+            fi
+          done
+
+          echo
+          echo "All required files are present."
+
+
+      # --------------------------------------------------------
+      # SECRET HYGIENE
+      # --------------------------------------------------------
+
+      - name: Ensure .env is not committed
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if git ls-files --error-unmatch .env >/dev/null 2>&1
+          then
+            echo "::error::.env is tracked by Git."
+            echo "Remove it from Git before continuing."
+            exit 1
+          fi
+
+          echo ".env is not tracked."
+
+
+      # --------------------------------------------------------
+      # PYTHON SYNTAX
+      # --------------------------------------------------------
+
+      - name: Compile Python source
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python -m compileall -q \
+            src \
+            airflow/dags \
+            app
+
+          echo "Python syntax checks passed."
+
+
+      # --------------------------------------------------------
+      # SPECIFIC AIRFLOW DAG CHECK
+      # --------------------------------------------------------
+
+      - name: Compile Airflow season DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python -m py_compile \
+            airflow/dags/f1_season_pipeline.py
+
+          echo "Airflow DAG syntax passed."
+
+
+      # --------------------------------------------------------
+      # COMPOSE VALIDATION
+      # --------------------------------------------------------
+
+      - name: Validate Compose configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker compose config --quiet
+
+          echo "Compose configuration is valid."
+
+
+      # --------------------------------------------------------
+      # SUMMARY
+      # --------------------------------------------------------
+
+      - name: CI summary
+        shell: bash
+        run: |
+          echo "========================================"
+          echo "F1 LAKEHOUSE CI PASSED"
+          echo "========================================"
+          echo "✓ Required files"
+          echo "✓ Secret hygiene"
+          echo "✓ Python syntax"
+          echo "✓ Airflow DAG syntax"
+          echo "✓ Compose validation"
+          echo "========================================"
