@@ -18,10 +18,14 @@ concurrency:
   group: f1-lakehouse-ci-${{ github.ref }}
   cancel-in-progress: true
 
+
+# ============================================================
+# CI-ONLY ENVIRONMENT VARIABLES
+# ============================================================
+
 env:
-  # Dummy CI-only values used to validate compose.yaml.
-  # These are NOT production credentials.
   AIRFLOW_UID: "50000"
+
   AIRFLOW_JWT_SECRET: "ci-only-jwt-secret"
   AIRFLOW_API_SECRET: "ci-only-api-secret"
 
@@ -31,15 +35,22 @@ env:
   SEAWEED_S3_BUCKET: "f1-raw"
   SEAWEED_TABLE_BUCKET: "f1-iceberg"
 
+  # dbt only needs these values to parse the profile.
+  # No live Trino connection is required for this phase.
+  TRINO_HOST: "localhost"
+  TRINO_PORT: "8080"
+
 
 jobs:
 
   # ==========================================================
+  # JOB 1
   # REPOSITORY VALIDATION
   # ==========================================================
 
   validate:
     name: Validate repository
+
     runs-on: ubuntu-24.04
 
     steps:
@@ -63,7 +74,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # REQUIRED PROJECT FILES
+      # REQUIRED FILES
       # --------------------------------------------------------
 
       - name: Check required files
@@ -75,13 +86,20 @@ jobs:
             "compose.yaml"
             "requirements.txt"
             "README.md"
+
             "airflow/dags/f1_season_pipeline.py"
+
             "src/common/find_missing_races.py"
+
             "src/ingestion/ingest_session.py"
             "src/ingestion/ingest_telemetry.py"
+
             "src/iceberg/promote_bronze.py"
             "src/iceberg/promote_all_telemetry.py"
             "src/iceberg/load_silver_telemetry.py"
+
+            "dbt/dbt_project.yml"
+            "configs/dbt/profiles.yml"
           )
 
           for file in "${required_files[@]}"
@@ -111,7 +129,7 @@ jobs:
           if git ls-files --error-unmatch .env >/dev/null 2>&1
           then
             echo "::error::.env is tracked by Git."
-            echo "Remove it from Git before continuing."
+            echo "Remove .env from Git."
             exit 1
           fi
 
@@ -136,7 +154,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # SPECIFIC AIRFLOW DAG CHECK
+      # AIRFLOW DAG SYNTAX
       # --------------------------------------------------------
 
       - name: Compile Airflow season DAG
@@ -151,7 +169,7 @@ jobs:
 
 
       # --------------------------------------------------------
-      # COMPOSE VALIDATION
+      # COMPOSE
       # --------------------------------------------------------
 
       - name: Validate Compose configuration
@@ -168,15 +186,198 @@ jobs:
       # SUMMARY
       # --------------------------------------------------------
 
-      - name: CI summary
+      - name: Repository validation summary
         shell: bash
         run: |
           echo "========================================"
-          echo "F1 LAKEHOUSE CI PASSED"
+          echo "REPOSITORY VALIDATION PASSED"
           echo "========================================"
           echo "✓ Required files"
           echo "✓ Secret hygiene"
           echo "✓ Python syntax"
           echo "✓ Airflow DAG syntax"
           echo "✓ Compose validation"
+          echo "========================================"
+
+
+  # ==========================================================
+  # JOB 2
+  # DBT STATIC VALIDATION
+  # ==========================================================
+
+  dbt:
+    name: Validate dbt project
+
+    runs-on: ubuntu-24.04
+
+    steps:
+
+      # --------------------------------------------------------
+      # CHECKOUT
+      # --------------------------------------------------------
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+
+      # --------------------------------------------------------
+      # PYTHON
+      # --------------------------------------------------------
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+
+      # --------------------------------------------------------
+      # INSTALL DBT
+      #
+      # These match the versions currently used by the project.
+      # --------------------------------------------------------
+
+      - name: Install dbt Core and Trino adapter
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python -m pip install --upgrade pip
+
+          python -m pip install \
+            "dbt-core==1.12.4" \
+            "dbt-trino==1.10.3"
+
+
+      # --------------------------------------------------------
+      # VERSION INFORMATION
+      # --------------------------------------------------------
+
+      - name: Show dbt version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dbt --version
+
+
+      # --------------------------------------------------------
+      # DBT DEPENDENCIES
+      #
+      # Only run dbt deps when a packages file exists.
+      # --------------------------------------------------------
+
+      - name: Install dbt packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -f dbt/packages.yml || -f dbt/dependencies.yml ]]
+          then
+            dbt deps \
+              --project-dir dbt \
+              --profiles-dir configs/dbt
+          else
+            echo "No dbt packages.yml/dependencies.yml found."
+            echo "Skipping dbt deps."
+          fi
+
+
+      # --------------------------------------------------------
+      # DBT PARSE
+      #
+      # Validates:
+      # - dbt_project.yml
+      # - model YAML
+      # - Jinja
+      # - refs
+      # - sources
+      # - macros
+      # - configs
+      #
+      # Does not build tables.
+      # --------------------------------------------------------
+
+      - name: Parse dbt project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dbt parse \
+            --project-dir dbt \
+            --profiles-dir configs/dbt
+
+
+      # --------------------------------------------------------
+      # DBT GRAPH / RESOURCE VALIDATION
+      # --------------------------------------------------------
+
+      - name: List dbt resources
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dbt ls \
+            --project-dir dbt \
+            --profiles-dir configs/dbt
+
+
+      # --------------------------------------------------------
+      # VERIFY IMPORTANT MODELS EXIST
+      # --------------------------------------------------------
+
+      - name: Verify required dbt models
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dbt ls \
+            --project-dir dbt \
+            --profiles-dir configs/dbt \
+            --select \
+              silver_laps \
+              silver_results \
+              silver_weather \
+              race_driver_performance \
+              lap_telemetry_metrics \
+            --output name \
+            > /tmp/models.txt
+
+          echo "Models discovered:"
+          cat /tmp/models.txt
+
+          required_models=(
+            "silver_laps"
+            "silver_results"
+            "silver_weather"
+            "race_driver_performance"
+            "lap_telemetry_metrics"
+          )
+
+          for model in "${required_models[@]}"
+          do
+            if ! grep -Fxq "$model" /tmp/models.txt
+            then
+              echo "::error::Required dbt model '$model' was not found."
+              exit 1
+            fi
+          done
+
+          echo
+          echo "All required dbt models were discovered."
+
+
+      # --------------------------------------------------------
+      # SUMMARY
+      # --------------------------------------------------------
+
+      - name: dbt validation summary
+        shell: bash
+        run: |
+          echo "========================================"
+          echo "DBT VALIDATION PASSED"
+          echo "========================================"
+          echo "✓ dbt installed"
+          echo "✓ dbt project parsed"
+          echo "✓ dbt graph discovered"
+          echo "✓ Required models found"
           echo "========================================"
