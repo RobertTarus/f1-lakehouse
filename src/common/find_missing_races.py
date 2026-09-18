@@ -8,8 +8,10 @@ from dotenv import load_dotenv
 from trino.dbapi import connect
 from trino.exceptions import TrinoUserError
 
-from race_schedule import get_completed_races
-
+try:
+    from .race_schedule import get_completed_races
+except ImportError:
+    from race_schedule import get_completed_races
 
 load_dotenv()
 
@@ -99,34 +101,50 @@ def get_event_slugs(
         cursor.close()
         connection.close()
 
-
 def get_event_drivers(
     table: str,
     year: int,
     session: str,
 ) -> dict[str, set[str]]:
     """
-    Return driver codes grouped by event_slug.
+    Return the distinct telemetry/lap drivers present for
+    each event slug in a specific Iceberg table.
 
-    Example:
-
-        {
-            "japanese-grand-prix": {
-                "VER",
-                "NOR",
-                "LEC",
-                ...
-            }
-        }
-
-    Missing schemas/tables are expected during a clean rebuild
-    and are treated as containing no drivers.
+    Missing tables or schemas are treated as an empty state
+    so season discovery can operate during a cold start.
     """
 
-    safe_session = session.replace("'", "''")
+    host = os.getenv(
+        "TRINO_HOST",
+        "localhost",
+    )
 
-    connection = get_trino_connection()
-    cursor = connection.cursor()
+    port = int(
+        os.getenv(
+            "TRINO_PORT",
+            "8081",
+        )
+    )
+
+    safe_session = (
+        session.replace(
+            "'",
+            "''",
+        )
+    )
+
+    connection = connect(
+        host=host,
+        port=port,
+        user="f1_season_discovery",
+        catalog="iceberg",
+        schema="bronze",
+        http_scheme="http",
+    )
+
+    cursor = (
+        connection.cursor()
+    )
 
     query = f"""
         SELECT DISTINCT
@@ -144,44 +162,70 @@ def get_event_drivers(
 
     try:
 
-        cursor.execute(query)
+        cursor.execute(
+            query
+        )
 
-        rows = cursor.fetchall()
+        rows = (
+            cursor.fetchall()
+        )
 
     except TrinoUserError as exc:
 
         error_name = getattr(
             exc,
             "error_name",
-            None,
+            "",
         )
 
-        # Expected during a clean/cold rebuild.
         if error_name in {
             "TABLE_NOT_FOUND",
             "SCHEMA_NOT_FOUND",
         }:
+
             return {}
 
         raise
 
     finally:
 
-        cursor.close()
-        connection.close()
+        try:
+            cursor.close()
+        except Exception:
+            pass
 
-    events: dict[str, set[str]] = {}
+        try:
+            connection.close()
+        except Exception:
+            pass
 
-    for event_slug, driver_code in rows:
+    drivers_by_event: dict[
+        str,
+        set[str],
+    ] = {}
 
-        events.setdefault(
-            event_slug,
+    for (
+        event_slug,
+        driver_code,
+    ) in rows:
+
+        # Defensive protection in addition to the SQL filter.
+        # This also protects the function if a future query
+        # changes and NULL values somehow reach this point.
+        if (
+            event_slug is None
+            or driver_code is None
+        ):
+            continue
+
+        drivers_by_event.setdefault(
+            str(event_slug),
             set(),
         ).add(
-            driver_code
+            str(driver_code)
         )
 
-    return events
+    return drivers_by_event
 
 
 def find_incomplete_races(
