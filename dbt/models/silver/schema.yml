@@ -23,8 +23,8 @@ models:
           - not_null
 
       - name: lap_time_ms
-        data_tests:
-          - not_null
+        description: >
+               Recorded lap time in milliseconds. Maybe null when FastF1 retains a legitimate lap record without an official lap time.
 
 
   - name: silver_results

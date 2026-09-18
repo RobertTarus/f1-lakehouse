@@ -26,5 +26,5 @@ models:
           - not_null
 
       - name: avg_lap_seconds
-        data_tests:
-          - not_null
+        description: >
+               Average valid timed lap in seconds. May be null when a driver has a race result but no usable timed laps.

@@ -1,5 +1,5 @@
-fastf1
-pandas
+fastf1==3.8.3
+pandas==2.3.3
 pyarrow
 boto3
 python-dotenv

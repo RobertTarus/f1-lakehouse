@@ -2,7 +2,7 @@
   
     
 
-    create table "iceberg"."gold"."race_driver_performance__dbt_tmp"
+    create table "iceberg"."gold"."race_driver_performance"
       
       
     as (

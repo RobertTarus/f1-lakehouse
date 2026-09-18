@@ -2,7 +2,7 @@
   
     
 
-    create table "iceberg"."silver"."silver_results__dbt_tmp"
+    create table "iceberg"."silver"."silver_results"
       
       
     as (

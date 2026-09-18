@@ -1,0 +1,50 @@
+{
+    "path_count": 154,
+    "parsed_path_count": 3,
+    "static_analysis_path_count": 1,
+    "static_analysis_parsed_path_count": 1,
+    "is_partial_parse_enabled": true,
+    "is_static_analysis_enabled": true,
+    "read_files_elapsed": 0.03361785000015516,
+    "load_macros_elapsed": 0.00041879600030370057,
+    "parse_project_elapsed": 0.7492882290025591,
+    "patch_sources_elapsed": 1.511799928266555e-05,
+    "process_manifest_elapsed": 0.0010973280004691333,
+    "load_all_elapsed": 0.9779930549993878,
+    "projects": [
+        {
+            "project_name": "f1_lakehouse",
+            "elapsed": 0.7491644350011484,
+            "parsers": [
+                {
+                    "parser": "model",
+                    "elapsed": 0.3069404650013894,
+                    "parsed_path_count": 1
+                },
+                {
+                    "parser": "test",
+                    "elapsed": 0.12286404999758815,
+                    "parsed_path_count": 1
+                },
+                {
+                    "parser": "test",
+                    "elapsed": 0.31934289899800206,
+                    "parsed_path_count": 1
+                }
+            ],
+            "parsed_path_count": 3
+        },
+        {
+            "project_name": "dbt_trino",
+            "elapsed": 0,
+            "parsers": [],
+            "parsed_path_count": 0
+        },
+        {
+            "project_name": "dbt",
+            "elapsed": 0,
+            "parsers": [],
+            "parsed_path_count": 0
+        }
+    ]
+}

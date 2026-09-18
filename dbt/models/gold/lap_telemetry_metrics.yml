@@ -1,0 +1,85 @@
+version: 2
+
+models:
+
+  - name: lap_telemetry_metrics
+    description: >
+      Gold telemetry model at one row per season, event,
+      session, driver and lap. Aggregates Silver telemetry
+      samples and enriches them with Silver lap information.
+
+    columns:
+
+      - name: season
+        description: Formula 1 season.
+        data_tests:
+          - not_null
+
+      - name: event_slug
+        description: Normalized event identifier.
+        data_tests:
+          - not_null
+
+      - name: session_type
+        description: FastF1 session type.
+        data_tests:
+          - not_null
+
+      - name: driver_code
+        description: Driver abbreviation.
+        data_tests:
+          - not_null
+
+      - name: lap_number
+        description: Lap number within the race session.
+        data_tests:
+          - not_null
+
+      - name: telemetry_samples
+        description: >
+          Number of Silver telemetry samples contributing
+          to the Gold lap record.
+        data_tests:
+          - not_null
+
+      - name: has_lap_record
+        description: >
+          True when the telemetry lap successfully reconciles
+          with a record in silver_laps.
+        data_tests:
+          - not_null
+
+          - accepted_values:
+              arguments:
+                values:
+                  - true
+                  - false
+                quote: false
+
+      - name: has_lap_timing
+        description: >
+          True when the matching Silver lap contains a
+          valid lap time.
+        data_tests:
+          - not_null
+
+          - accepted_values:
+              arguments:
+                values:
+                  - true
+                  - false
+                quote: false
+
+      - name: lap_match_status
+        description: >
+          Classification of the telemetry-to-lap
+          reconciliation result.
+        data_tests:
+          - not_null
+
+          - accepted_values:
+              arguments:
+                values:
+                  - MATCHED_WITH_LAP_TIME
+                  - MATCHED_NO_LAP_TIME
+                  - NO_LAP_RECORD
